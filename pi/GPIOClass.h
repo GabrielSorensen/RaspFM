@@ -1,20 +1,3 @@
-/*
- * g.h
- *
- *  Created on: Nov 10, 2014
- *      Author: Gabriellaptop
- */
-
-#ifndef G_H_
-#define G_H_
-
-class g {
-public:
-	g();
-	virtual ~g();
-};
-
-#endif /* G_H_ */
 #ifndef GPIO_CLASS_H
 #define GPIO_CLASS_H
 
