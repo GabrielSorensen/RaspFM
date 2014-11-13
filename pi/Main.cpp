@@ -1,6 +1,4 @@
 #import "GPIOClass.cpp"
-using namespace std;
-
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -16,6 +14,8 @@ using namespace std;
 #include <signal.h>
 #include <unistd.h>
 
+using namespace std;
+
 #define PAGE_SIZE (4*1024)
 #define BLOCK_SIZE (4*1024)
 
@@ -24,7 +24,6 @@ using namespace std;
 int  mem_fd;
 char *gpio_mem, *gpio_map;
 char *spi0_mem, *spi0_map;
-
 
 // I/O access
 volatile unsigned *gpio;
