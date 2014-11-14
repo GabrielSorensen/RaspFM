@@ -3,7 +3,7 @@
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <GPIOClass.cpp>
+#include <GPIOClass.h>
 
 using namespace std;
  
