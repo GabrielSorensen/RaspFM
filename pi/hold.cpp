@@ -1,6 +1,6 @@
 //
-#import <unistd.h>
-#import "GPIOClass.cpp"
+#include <unistd.h>
+#include "GPIOClass.h"
 
 using namespace std;
 
