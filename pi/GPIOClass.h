@@ -125,7 +125,7 @@ float GPIOClass::getval(string& val){
     getvalgpio >> val ;  //read gpio value
 
     getvalgpio.close(); //close the value file
-    return val;
+    return 0;
 }
 
 string GPIOClass::get_gpionum(){
