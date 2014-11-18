@@ -19,6 +19,7 @@ public:
     int setdir_gpio(string dir); // Set GPIO Direction
     int setval_gpio(string val); // Set GPIO Value (putput pins)
     int getval_gpio(string& val); // Get GPIO Value (input/ output pins)
+    float getval(string& val);
     string get_gpionum(); // return the GPIO number associated with the instance of an object
 private:
     string gpionum; // GPIO number associated with the instance of an object
@@ -110,6 +111,21 @@ int GPIOClass::getval_gpio(string& val){
 
     getvalgpio.close(); //close the value file
     return 0;
+}
+
+float GPIOClass::getval(string& val){
+
+    string getval_str = "/sys/class/gpio/gpio" + this->gpionum + "/value";
+    ifstream getvalgpio(getval_str.c_str());// open value file for gpio
+    if (getvalgpio < 0){
+        cout << " OPERATION FAILED: Unable to get value of GPIO"<< this->gpionum <<" ."<< endl;
+        return -1;
+            }
+
+    getvalgpio >> val ;  //read gpio value
+
+    getvalgpio.close(); //close the value file
+    return val;
 }
 
 string GPIOClass::get_gpionum(){

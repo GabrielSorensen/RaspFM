@@ -21,8 +21,8 @@ int main () {
 
 	while (1) {
 		usleep(5000000); // 0.5 sec
-		in1->getval_gpio(val1);
-		in2->getval_gpio(val2);
+		in1->getval(val1);
+		in2->getval(val2);
 		cout << "Value of pin4: " << val1 << endl;
 		cout << "Value of pin17: " << val2 << endl;
 
