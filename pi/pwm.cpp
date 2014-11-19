@@ -18,23 +18,23 @@ clock_t timer;
 int main (int argc, char *argv[]) {
 	// lets assume that the way to run this is
 	// pwm.exe [rising/falling/sine/constant] [time to complete task]
-
-	if (argc != 3) {
-		cout << "Usage: pwm [rising/falling/sine/constant] [time to complete task]" << endl;
+	if (argc != 4) {
+		cout << "Usage: pwm [rising/falling/sine/constant] [time to complete task] [top brightness percent]" << endl;
 		return -1;
 	}
 	timer = clock();
 	string type = argv[1];
 	transform(type.begin(), type.end(), type.begin(), :: tolower);
-	double time_to_complete = strtod (argv[2]);
-	GPIOClass* in1 = new GPIOClass("4");
+	double time_to_complete = strtod ( argv[2] );
+	double brightness = strtod( argv[3] );
+	GPIOClass* out1 = new GPIOClass("4");
 	GPIOClass* in2 = new GPIOClass("17");
 	string val1, val2;
 
-	in1->export_gpio();
+	out1->export_gpio();
 	in2->export_gpio();
 
-	in1->setdir_gpio("out");
+	out1->setdir_gpio("out");
 	in2->setdir_gpio("in");
 
 	cout << "Pins are setup." << endl;
@@ -53,28 +53,22 @@ int main (int argc, char *argv[]) {
 
 	}
 	if (type == "constant") {
-
-	}
-
-	while (1) {
-		usleep(500000); // 0.5 sec
-		in1->getval(val1);
-		in2->getval(val2);
-		cout << "Value of pin4: " << val1 << endl;
-		cout << "Value of pin17: " << val2 << endl;
-
-
+		clock_t finish = clock() + time_to_complete * CLOCKS_PER_SEC;
+		while (clock() < finish) {
+			// pulse for however long we need to to achieve brightness.
+			Pulse(out1, ????????????????????);
+		}
 	}
 }
 
 
-void pulse(GPIOClass pin, int cycles) {
+void Pulse(GPIOClass pin, int cycles) {
 	bool running = true;
 	while (running) {
 		pin.setval_gpio("1"); // turn the pin on
-			// sleep for number of cycles / 1/100 sec
-		Wait(cycles * 1/100);
-		running = false;
+		Wait(cycles * 1/100); // sleep for number of cycles / 1/100 sec
+		pin.setval_gpio("0"); // turn the pin off
+		running = false; // this is unnessesary but could be useful if modified a bit.
 	}
 	return;
 }
