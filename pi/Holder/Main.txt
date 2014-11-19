@@ -1,4 +1,4 @@
-#import "GPIOClass.cpp"
+#include "GPIOClass.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -636,7 +636,7 @@ void setupDMA( float centerFreq ){
 
 
 
-int main(int argc, char **argv)
+int mainBAK(int argc, char **argv)
 {
     
     if (argc>1) {
