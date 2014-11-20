@@ -172,7 +172,7 @@ void morseReciever(GPIOClass* pin){
 	int start, space;
 	string charv;
 	start = in.find("1");
-	in = in.substr(start);
+	in = in.substr(start, in.length());
 
 	space = in.find("0000000");
 	vector<string> word, character;
@@ -182,6 +182,7 @@ void morseReciever(GPIOClass* pin){
 		in = in.substr(space+7);
 		word.push_back("s");
 	}
+	cout << "wprd" << endl;
 
 	for(int i =0; i<word.size(); i++){
 		charv = in.at(i);
