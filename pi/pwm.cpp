@@ -44,7 +44,7 @@ int main (int argc, char *argv[]) {
 		cin >> r;
 		resolution = r;
 		if (in == "recieve" || in == "listen") {
-
+			morseReciever(in2);
 		}
 		morseCoder(in2, in);
 		return 0;
