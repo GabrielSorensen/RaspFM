@@ -46,7 +46,7 @@ int main (int argc, char *argv[]) {
 		if (in == "recieve" || in == "listen") {
 
 		}
-		morseCoder(out1, in);
+		morseCoder(in2, in);
 		return 0;
 	}
 	while (time_to_complete <= 0) {
