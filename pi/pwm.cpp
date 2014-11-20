@@ -73,11 +73,6 @@ int main (int argc, char *argv[]) {
 					--t;
 				}
 			}
-			//Pulse(out1, sin((2PI/2) * abs(1/t)));
-			//Wait(sin((PI/2) * abs(1/t)));
-			cout << sin((PI/2)/t) << endl;
-			cout << endl;
-			cout << "this is t" << t << endl;
 			Pulse(out1, 1/resolution);
 			Wait(sin((PI/2)/t));
 		}
