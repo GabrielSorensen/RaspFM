@@ -56,6 +56,7 @@ int main (int argc, char *argv[]) {
 			t -= 1;
 			//Pulse(out1, sin((2PI/2) * abs(1/t)));
 			//Wait(sin((PI/2) * abs(1/t)));
+			cout << sin((2*PI)/abs(t)) << endl;
 			Pulse(out1, 1/resolution);
 			Wait(sin((2*PI)/abs(t)));
 		}
