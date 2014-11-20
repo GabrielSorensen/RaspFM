@@ -66,7 +66,14 @@ int main (int argc, char *argv[]) {
 
 	}
 	if (type == "sine") {
-
+		clock_t finish = clock() + time_to_complete * CLOCKS_PER_SEC;
+		while (clock() < finish) {
+			// pulse for however long we need to to achieve brightness.
+			Pulse(out1, 1/resolution);
+			for (int i = 0; i < 1; i += resolution) {
+				Wait(sin(i)/resolution);
+			}
+		}
 	}
 	if (type == "constant") {
 		out1->setval_gpio("1"); // turn the pin on
