@@ -163,12 +163,12 @@ void morseReciever(GPIOClass* pin){
 		in += s;
 		cout << s;
 		if(in.length() > 12){
-			if (in.substr(in.length()-12) == "000000000000") {
+			if (in.substr(in.length()-12, in.length()) == "000000000000") {
 				running = false;
 			}
 		}
 	}
-	cout << endl;
+	cout << "hi" << endl;
 	int start, space;
 	string charv;
 	start = in.find("1");
