@@ -56,8 +56,8 @@ int main (int argc, char *argv[]) {
 			t -= 1;
 			//Pulse(out1, sin((2PI/2) * abs(1/t)));
 			//Wait(sin((PI/2) * abs(1/t)));
-			Pulse(out1, sin((2*PI) * abs(1/t)));
-			Wait(sin((2*PI) * abs(1/t)));
+			Pulse(out1, sin((PI) * abs(1/t)));
+			Wait(sin((PI) * abs(1/t)));
 		}
 	}
 	if (type == "falling") {
