@@ -54,7 +54,7 @@ int main (int argc, char *argv[]) {
 		double t = time_to_complete;
 		while (clock() < finish) {
 			// pulse for however long we need to to achieve brightness.
-			if(t > 1){
+			if(sin((2*PI)/t) > 1){
 				t -= 1;
 			}
 			else{
