@@ -12,9 +12,12 @@ using namespace std;
 
 void Pulse(GPIOClass* pin, double cycles);
 void Wait(double seconds);
+void morseCoder(GPIOClass* pin1, string s);
+void morseBlink(GPIOClass* pin1, char c);
+
 clock_t timer;
 double time_to_complete;
-double resolution = CLOCKS_PER_SEC/10;
+double resolution = 200;
 
 #define PI 4*atan(1)
 
@@ -126,4 +129,136 @@ void Wait ( double seconds )
 	clock_t endwait;
 	endwait = clock () + seconds * CLOCKS_PER_SEC ;
 	while (clock() < endwait) {}
+}
+
+
+void morseCoder(GPIOClass* pin1, string s) {
+	transform(s.begin(), s.end(), s.begin(), :: tolower);
+	for (int i = 0; i < s.length(); i++) {
+		if (s.at(i) == " ") {
+			Wait( 7 / resolution );
+		} else {
+			morseBlink(pin1, s.at(i));
+		}
+	}
+}
+void morseBlink(GPIOClass* pin1, char c) {
+	switch (c) {
+	case 'a':
+		Pulse(pin1, 1.0);
+		Wait(3/resolution);
+		Pulse(pin1, 3.0);
+		break;
+	case 'b':
+		Pulse(pin1, 3.0);
+		Wait(3/resolution);
+		Pulse(pin1, 1.0);
+		Wait(3/resolution);
+		Pulse(pin1, 1.0);
+		Wait(3/resolution);
+		Pulse(pin1, 1.0);
+		break;
+	case 'c':
+
+		break;
+	case 'd':
+
+		break;
+	case 'e':
+
+		break;
+	case 'f':
+
+		break;
+	case 'g':
+
+		break;
+	case 'h':
+
+		break;
+	case 'i':
+
+		break;
+	case 'j':
+
+		break;
+	case 'k':
+
+		break;
+	case 'l':
+
+		break;
+	case 'm':
+
+		break;
+	case 'n':
+
+		break;
+	case 'o':
+
+		break;
+	case 'p':
+
+		break;
+	case 'q':
+
+		break;
+	case 'r':
+
+		break;
+	case 's':
+
+		break;
+	case 't':
+
+		break;
+	case 'u':
+
+		break;
+	case 'v':
+
+		break;
+	case 'w':
+
+		break;
+	case 'x':
+
+		break;
+	case 'y':
+
+		break;
+	case 'z':
+
+		break;
+	case '1':
+
+		break;
+	case '2':
+
+		break;
+	case '3':
+
+		break;
+	case '4':
+
+		break;
+	case '5':
+
+		break;
+	case '6':
+
+		break;
+	case '7':
+
+		break;
+	case '8':
+
+		break;
+	case '9':
+
+		break;
+	case '0':
+
+		break;
+	}
 }
