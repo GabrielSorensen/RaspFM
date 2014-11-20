@@ -168,8 +168,7 @@ void morseReciever(GPIOClass* pin){
 	}
 	cout << endl;
 	int start, space;
-	string charv;
-	char *word, *character;
+	string charv, word, character;
 	start = in.find("1");
 	in = in.substr(start);
 	
