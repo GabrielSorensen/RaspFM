@@ -16,7 +16,7 @@ clock_t timer;
 double time_to_complete;
 double resolution = 100;
 
-#define PI = 4*atan(1);
+#define PI 4*atan(1)
 
 int main (int argc, char *argv[]) {
 	string type = argv[1];
