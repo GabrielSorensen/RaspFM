@@ -17,7 +17,7 @@ void morseBlink(GPIOClass* pin1, char c);
 
 clock_t timer;
 double time_to_complete;
-double resolution = 200;
+double resolution = 50;
 
 #define PI 4*atan(1)
 
