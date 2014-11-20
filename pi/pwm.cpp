@@ -51,8 +51,10 @@ int main (int argc, char *argv[]) {
 		resolution = r;
 		if (in == "recieve" || in == "listen") {
 			morseReciever(in2);
+		} else {
+			cout << "tansmitting:" << endl;
+			morseCoder(in2, in);
 		}
-		morseCoder(in2, in);
 		return 0;
 	}
 	while (time_to_complete <= 0) {
