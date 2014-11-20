@@ -158,7 +158,7 @@ void morseReciever(GPIOClass* pin){
 	string in, s;
 	bool running = true;
 	while (running) {
-		pin->getval_gpio(s)
+		pin->getval_gpio(s);
 		in += s;
 		if(in.lenght() > 12){
 			substr(in.length()-12,in.length());
