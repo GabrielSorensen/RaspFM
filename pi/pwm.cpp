@@ -63,7 +63,7 @@ int main (int argc, char *argv[]) {
 		clock_t finish = clock() + time_to_complete * CLOCKS_PER_SEC;
 				while (clock() < finish) {
 					// pulse for however long we need to to achieve brightness.
-					Pulse(out1, time_to_complete * 100.0);
+					Pulse(out1, 0.5 * 100.0);
 				}
 	}
 }
@@ -75,10 +75,10 @@ void Pulse(GPIOClass* pin, double cycles) {
 	while (running) {
 		pin->setval_gpio("1"); // turn the pin on
 		Wait(cycles * 1/100); // sleep for number of cycles / 1/100 sec
+		cout << "Waiting during pulse" << endl;
 		pin->setval_gpio("0"); // turn the pin off
 		running = false; // this is unnessesary but could be useful if modified a bit.
 	}
-	return;
 }
 
 void Wait ( double seconds )
@@ -86,5 +86,4 @@ void Wait ( double seconds )
 	clock_t endwait;
 	endwait = clock () + seconds * CLOCKS_PER_SEC ;
 	while (clock() < endwait) {}
-	return;
 }
