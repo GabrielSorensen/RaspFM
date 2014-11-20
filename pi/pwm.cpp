@@ -171,6 +171,7 @@ void morseReciever(GPIOClass* pin){
 				running = false;
 			}
 		}
+		Wait(1/resolution);
 	}
 	int start, space;
 	string charv;
