@@ -175,16 +175,16 @@ void morseReciever(GPIOClass* pin){
 	space = in.find("0000000");
 	vector<string> word, character;
 	
-	while(in!=NULL){
+	while(in.length() > 0){
 		word.push_back(in.substr(0,space));
 		in = in.substr(space+7);
-		word.push_back('s');
+		word.push_back("s");
 	}
 	
 	for(int i =0; i<word.size(); i++){
 		charv = in.at(i);
 		if(in.at(i) != 's'){
-			while(charv!=NULL){
+			while(charv.length() > 0){
 				string temp;
 				temp = charv.substr(0, charv.find("000"));
 				character.push_back(temp);
@@ -192,7 +192,7 @@ void morseReciever(GPIOClass* pin){
 			}
 		}
 		else{
-			character.push_back(' ');
+			character.push_back(" ");
 		}
 	}
 }
