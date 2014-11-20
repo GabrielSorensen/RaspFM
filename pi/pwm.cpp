@@ -54,7 +54,12 @@ int main (int argc, char *argv[]) {
 		double t = time_to_complete;
 		while (clock() < finish) {
 			// pulse for however long we need to to achieve brightness.
-			t -= 1;
+			if(t>0){
+				t -= 1;
+			}
+			else{
+				t += 1;
+			}
 			//Pulse(out1, sin((2PI/2) * abs(1/t)));
 			//Wait(sin((PI/2) * abs(1/t)));
 			cout << sin((2*PI)/abs(t)) << endl;
