@@ -141,7 +141,7 @@ void Wait ( double seconds )
 void morseCoder(GPIOClass* pin1, string s) {
 	transform(s.begin(), s.end(), s.begin(), :: tolower);
 	for (int i = 0; i < s.length(); i++) {
-		if (s.at(i) == " ") {
+		if (s.at(i) == ' ') {
 			Wait( 7 / resolution );
 		} else {
 			Wait(3/resolution);
