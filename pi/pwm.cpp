@@ -159,7 +159,6 @@ void morseReciever(GPIOClass* pin){
 	bool running = true;
 	cout << "lets start." << endl;
 	while (running) {
-		cout << "starting to read" << endl;
 		pin->getval_gpio(s);
 		in += s;
 		cout << s;
