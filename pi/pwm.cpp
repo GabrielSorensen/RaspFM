@@ -166,7 +166,7 @@ void morseReciever(GPIOClass* pin){
 		pin->getval_gpio(s);
 		in += s;
 		cout << s;
-		if(in.length() > 12){
+		if(in.length() > 25){
 			if (in.substr(in.length()-12, in.length()) == "000000000000") {
 				running = false;
 			}
@@ -326,7 +326,7 @@ void morseReciever(GPIOClass* pin){
 		}
 	}
 	cout << endl;
-	morseReciever(pin);
+	//morseReciever(pin);
 }
 
 void morseCoder(GPIOClass* pin1, string s) {
