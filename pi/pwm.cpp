@@ -24,20 +24,26 @@ double resolution = 50;
 int main (int argc, char *argv[]) {
 	string type = argv[1];
 	transform(type.begin(), type.end(), type.begin(), :: tolower);
+
+	GPIOClass* out1 = new GPIOClass("4");
+	GPIOClass* in2 = new GPIOClass("17");
 	// lets assume that the way to run this is
 	// pwm.exe [rising/falling/sine/constant]
 	if (argc != 2) {
 		cout << "Usage: pwm [rising/falling/sine/constant/blink]" << endl;
 		return -1;
 	}
-
+	if (type == "morse") {
+		string in;
+		cout << "Type sentence to translate to morse code." << endl;
+		getline(cin, in);
+		morseCoder(out1, in);
+		return 0;
+	}
 	while (time_to_complete <= 0) {
 		cout << "Input How Long To Run (in seconds)" << endl;
 		cin >> time_to_complete;
 	}
-
-	GPIOClass* out1 = new GPIOClass("4");
-	GPIOClass* in2 = new GPIOClass("17");
 
 	out1->export_gpio();
 	in2->export_gpio();
@@ -108,12 +114,7 @@ int main (int argc, char *argv[]) {
 			Wait(4/resolution);
 		}
 	}
-	if (type == "morse") {
-		string in;
-		cout << "Type sentence to translate to morse code." << endl;
-		cin >> in;
-		morseCoder(out1, in);
-	}
+
 	cout << "Done." << endl;
 }
 
