@@ -54,11 +54,11 @@ int main (int argc, char *argv[]) {
 		double t = time_to_complete;
 		while (clock() < finish) {
 			// pulse for however long we need to to achieve brightness.
-			if(sin((2*PI)/t) > 2){
-				t -= 1;
+			if(t == 0){
+				t = 1;		
 			}
 			else{
-				t+=1;
+				t -=resolution;
 			}
 			//Pulse(out1, sin((2PI/2) * abs(1/t)));
 			//Wait(sin((PI/2) * abs(1/t)));
