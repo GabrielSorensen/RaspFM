@@ -52,10 +52,8 @@ int main (int argc, char *argv[]) {
 		clock_t finish = clock() + time_to_complete * CLOCKS_PER_SEC;
 		while (clock() < finish) {
 			// pulse for however long we need to to achieve brightness.
-			for(int i = 0 ; i < time_to_complete; i++ ){
-				Pulse(out1, sin((PI/2) * (i/time_to_complete)));
-				Wait(sin((PI/2) * (i/time_to_complete)));
-			}
+				Pulse(out1, sin((PI/2) * (time_to_complete/finish)));
+				Wait(sin((PI/2) * (time_to_complete/finish)));
 		}
 	}
 	if (type == "falling") {
