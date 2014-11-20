@@ -65,7 +65,10 @@ int main (int argc, char *argv[]) {
 
 	}
 	if (type == "constant") {
-
+		pin->setval_gpio("1"); // turn the pin on
+		Wait(time_to_complete); // sleep for number of cycles / 1/100 sec
+		//cout << "Waiting during pulse" << endl;
+		pin->setval_gpio("0"); // turn the pin off
 	}
 	if (type == "blink") { // aka. TESTR
 		clock_t finish = clock() + time_to_complete * CLOCKS_PER_SEC;
@@ -84,7 +87,7 @@ void Pulse(GPIOClass* pin, double cycles) {
 	bool running = true;
 	while (running) {
 		pin->setval_gpio("1"); // turn the pin on
-		Wait(cycles * 1/resolution); // sleep for number of cycles / 1/100 sec
+		Wait(cycles / resolution); // sleep for number of cycles / 1/100 sec
 		//cout << "Waiting during pulse" << endl;
 		pin->setval_gpio("0"); // turn the pin off
 		running = false; // this is unnessesary but could be useful if modified a bit.
