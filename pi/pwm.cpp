@@ -20,7 +20,7 @@ int main (int argc, char *argv[]) {
 	// lets assume that the way to run this is
 	// pwm.exe [rising/falling/sine/constant]
 	if (argc != 2) {
-		cout << "Usage: pwm [rising/falling/sine/constant/pulse]" << endl;
+		cout << "Usage: pwm [rising/falling/sine/constant/blink]" << endl;
 		return -1;
 	}
 
@@ -63,9 +63,10 @@ int main (int argc, char *argv[]) {
 		clock_t finish = clock() + time_to_complete * CLOCKS_PER_SEC;
 				while (clock() < finish) {
 					// pulse for however long we need to to achieve brightness.
-					Pulse(out1, 0.5 * 100.0);
+					Pulse(out1, 1 * 100.0);
 				}
 	}
+	cout << "Done." << endl;
 }
 
 //1 cycle is 1/100th of a second
@@ -75,7 +76,7 @@ void Pulse(GPIOClass* pin, double cycles) {
 	while (running) {
 		pin->setval_gpio("1"); // turn the pin on
 		Wait(cycles * 1/100); // sleep for number of cycles / 1/100 sec
-		cout << "Waiting during pulse" << endl;
+		//cout << "Waiting during pulse" << endl;
 		pin->setval_gpio("0"); // turn the pin off
 		running = false; // this is unnessesary but could be useful if modified a bit.
 	}
