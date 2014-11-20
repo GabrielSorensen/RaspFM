@@ -170,7 +170,6 @@ void morseReciever(GPIOClass* pin){
 			}
 		}
 	}
-	cout << "hi" << endl;
 	int start, space;
 	string charv;
 	start = in.find("1");
@@ -178,7 +177,6 @@ void morseReciever(GPIOClass* pin){
 	if (start != -1) {
 		in = in.substr(start, in.length());
 	}
-	cout << "between" << endl;
 	if (start != -1) {
 		space = in.find("0000000");
 	}
@@ -195,7 +193,6 @@ void morseReciever(GPIOClass* pin){
 			space = in.find("0000000");
 		}
 	}
-	cout << "wprd" << endl;
 
 	for(int i =0; i<word.size(); i++){
 		charv = in.at(i);
@@ -326,6 +323,7 @@ void morseReciever(GPIOClass* pin){
 		}
 	}
 	cout << endl;
+	morseReciever(pin);
 }
 
 void morseCoder(GPIOClass* pin1, string s) {
