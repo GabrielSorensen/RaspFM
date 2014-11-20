@@ -57,9 +57,10 @@ int main (int argc, char *argv[]) {
 			t -= 1;
 			//Pulse(out1, sin((2PI/2) * abs(1/t)));
 			//Wait(sin((PI/2) * abs(1/t)));
-			cout << abs(sin((2*PI)/t)) << endl;
+			cout << sin((2*PI)/t) << endl;
+			cout << "this is t" << t << endl;
 			Pulse(out1, 1/resolution);
-			Wait(abs(sin((2*PI)/t)));
+			Wait(sin((2*PI)/t));
 		}
 	}
 	if (type == "falling") {
