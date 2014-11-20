@@ -138,6 +138,7 @@ void morseCoder(GPIOClass* pin1, string s) {
 		if (s.at(i) == " ") {
 			Wait( 7 / resolution );
 		} else {
+			Wait(3/resolution);
 			morseBlink(pin1, s.at(i));
 		}
 	}
@@ -159,106 +160,291 @@ void morseBlink(GPIOClass* pin1, char c) {
 		Pulse(pin1, 1.0);
 		break;
 	case 'c':
-
+		Pulse(pin1, 3.0);
+		Wait(3/resolution);
+		Pulse(pin1, 1.0);
+		Wait(3/resolution);
+		Pulse(pin1, 3.0);
+		Wait(3/resolution);
+		Pulse(pin1, 1.0);
 		break;
 	case 'd':
-
+		Pulse(pin1, 3.0);
+		Wait(3/resolution);
+		Pulse(pin1, 1.0);
+		Wait(3/resolution);
+		Pulse(pin1, 1.0);
 		break;
 	case 'e':
-
+		Pulse(pin1, 1.0);
 		break;
 	case 'f':
-
+		Pulse(pin1, 1.0);
+		Wait(3/resolution);
+		Pulse(pin1, 1.0);
+		Wait(3/resolution);
+		Pulse(pin1, 3.0);
+		Wait(3/resolution);
+		Pulse(pin1, 1.0);
 		break;
 	case 'g':
-
+		Pulse(pin1, 3.0);
+		Wait(3/resolution);
+		Pulse(pin1, 3.0);
+		Wait(3/resolution);
+		Pulse(pin1, 1.0);
 		break;
 	case 'h':
-
+		Pulse(pin1, 1.0);
+		Wait(3/resolution);
+		Pulse(pin1, 1.0);
+		Wait(3/resolution);
+		Pulse(pin1, 1.0);
+		Wait(3/resolution);
+		Pulse(pin1, 1.0);
 		break;
 	case 'i':
-
+		Pulse(pin1, 1.0);
+		Wait(3/resolution);
+		Pulse(pin1, 1.0);
 		break;
 	case 'j':
-
+		Pulse(pin1, 1.0);
+		Wait(3/resolution);
+		Pulse(pin1, 3.0);
+		Wait(3/resolution);
+		Pulse(pin1, 3.0);
+		Wait(3/resolution);
+		Pulse(pin1, 3.0);
 		break;
 	case 'k':
-
+		Pulse(pin1, 3.0);
+		Wait(3/resolution);
+		Pulse(pin1, 1.0);
+		Wait(3/resolution);
+		Pulse(pin1, 3.0);
 		break;
 	case 'l':
-
+		Pulse(pin1, 1.0);
+		Wait(3/resolution);
+		Pulse(pin1, 3.0);
+		Wait(3/resolution);
+		Pulse(pin1, 1.0);
+		Wait(3/resolution);
+		Pulse(pin1, 1.0);
 		break;
 	case 'm':
-
+		Pulse(pin1, 3.0);
+		Wait(3/resolution);
+		Pulse(pin1, 3.0);
 		break;
 	case 'n':
-
+		Pulse(pin1, 3.0);
+		Wait(3/resolution);
+		Pulse(pin1, 1.0);
 		break;
 	case 'o':
-
+		Pulse(pin1, 3.0);
+		Wait(3/resolution);
+		Pulse(pin1, 3.0);
+		Wait(3/resolution);
+		Pulse(pin1, 3.0);
 		break;
 	case 'p':
-
+		Pulse(pin1, 1.0);
+		Wait(3/resolution);
+		Pulse(pin1, 3.0);
+		Wait(3/resolution);
+		Pulse(pin1, 3.0);
+		Wait(3/resolution);
+		Pulse(pin1, 1.0);
 		break;
 	case 'q':
-
+		Pulse(pin1, 3.0);
+		Wait(3/resolution);
+		Pulse(pin1, 3.0);
+		Wait(3/resolution);
+		Pulse(pin1, 1.0);
+		Wait(3/resolution);
+		Pulse(pin1, 3.0);
 		break;
 	case 'r':
-
+		Pulse(pin1, 1.0);
+		Wait(3/resolution);
+		Pulse(pin1, 3.0);
+		Wait(3/resolution);
+		Pulse(pin1, 1.0);
 		break;
 	case 's':
-
+		Pulse(pin1, 1.0);
+		Wait(3/resolution);
+		Pulse(pin1, 1.0);
+		Wait(3/resolution);
+		Pulse(pin1, 1.0);
 		break;
 	case 't':
-
+		Pulse(pin1, 3.0);
 		break;
 	case 'u':
-
+		Pulse(pin1, 1.0);
+		Wait(3/resolution);
+		Pulse(pin1, 1.0);
+		Wait(3/resolution);
+		Pulse(pin1, 3.0);
 		break;
 	case 'v':
-
+		Pulse(pin1, 1.0);
+		Wait(3/resolution);
+		Pulse(pin1, 1.0);
+		Wait(3/resolution);
+		Pulse(pin1, 1.0);
+		Wait(3/resolution);
+		Pulse(pin1, 3.0);
 		break;
 	case 'w':
-
+		Pulse(pin1, 1.0);
+		Wait(3/resolution);
+		Pulse(pin1, 3.0);
+		Wait(3/resolution);
+		Pulse(pin1, 3.0);
 		break;
 	case 'x':
-
+		Pulse(pin1, 3.0);
+		Wait(3/resolution);
+		Pulse(pin1, 1.0);
+		Wait(3/resolution);
+		Pulse(pin1, 1.0);
+		Wait(3/resolution);
+		Pulse(pin1, 3.0);
 		break;
 	case 'y':
-
+		Pulse(pin1, 3.0);
+		Wait(3/resolution);
+		Pulse(pin1, 1.0);
+		Wait(3/resolution);
+		Pulse(pin1, 3.0);
+		Wait(3/resolution);
+		Pulse(pin1, 3.0);
 		break;
 	case 'z':
-
+		Pulse(pin1, 3.0);
+		Wait(3/resolution);
+		Pulse(pin1, 3.0);
+		Wait(3/resolution);
+		Pulse(pin1, 1.0);
+		Wait(3/resolution);
+		Pulse(pin1, 1.0);
+		Wait(3/resolution);
 		break;
 	case '1':
-
+		Pulse(pin1, 1.0);
+		Wait(3/resolution);
+		Pulse(pin1, 3.0);
+		Wait(3/resolution);
+		Pulse(pin1, 3.0);
+		Wait(3/resolution);
+		Pulse(pin1, 3.0);
+		Wait(3/resolution);
+		Pulse(pin1, 3.0);
 		break;
 	case '2':
-
+		Pulse(pin1, 1.0);
+		Wait(3/resolution);
+		Pulse(pin1, 1.0);
+		Wait(3/resolution);
+		Pulse(pin1, 3.0);
+		Wait(3/resolution);
+		Pulse(pin1, 3.0);
+		Wait(3/resolution);
+		Pulse(pin1, 3.0);
 		break;
 	case '3':
-
+		Pulse(pin1, 1.0);
+		Wait(3/resolution);
+		Pulse(pin1, 1.0);
+		Wait(3/resolution);
+		Pulse(pin1, 1.0);
+		Wait(3/resolution);
+		Pulse(pin1, 3.0);
+		Wait(3/resolution);
+		Pulse(pin1, 3.0);
 		break;
 	case '4':
-
+		Pulse(pin1, 1.0);
+		Wait(3/resolution);
+		Pulse(pin1, 1.0);
+		Wait(3/resolution);
+		Pulse(pin1, 1.0);
+		Wait(3/resolution);
+		Pulse(pin1, 1.0);
+		Wait(3/resolution);
+		Pulse(pin1, 3.0);
 		break;
 	case '5':
-
+		Pulse(pin1, 1.0);
+		Wait(3/resolution);
+		Pulse(pin1, 1.0);
+		Wait(3/resolution);
+		Pulse(pin1, 1.0);
+		Wait(3/resolution);
+		Pulse(pin1, 1.0);
+		Wait(3/resolution);
+		Pulse(pin1, 1.0);
 		break;
 	case '6':
-
+		Pulse(pin1, 3.0);
+		Wait(3/resolution);
+		Pulse(pin1, 1.0);
+		Wait(3/resolution);
+		Pulse(pin1, 1.0);
+		Wait(3/resolution);
+		Pulse(pin1, 1.0);
+		Wait(3/resolution);
+		Pulse(pin1, 1.0);
 		break;
 	case '7':
-
+		Pulse(pin1, 3.0);
+		Wait(3/resolution);
+		Pulse(pin1, 3.0);
+		Wait(3/resolution);
+		Pulse(pin1, 1.0);
+		Wait(3/resolution);
+		Pulse(pin1, 1.0);
+		Wait(3/resolution);
+		Pulse(pin1, 1.0);
 		break;
 	case '8':
-
+		Pulse(pin1, 3.0);
+		Wait(3/resolution);
+		Pulse(pin1, 3.0);
+		Wait(3/resolution);
+		Pulse(pin1, 3.0);
+		Wait(3/resolution);
+		Pulse(pin1, 1.0);
+		Wait(3/resolution);
+		Pulse(pin1, 1.0);
 		break;
 	case '9':
-
+		Pulse(pin1, 3.0);
+		Wait(3/resolution);
+		Pulse(pin1, 3.0);
+		Wait(3/resolution);
+		Pulse(pin1, 3.0);
+		Wait(3/resolution);
+		Pulse(pin1, 3.0);
+		Wait(3/resolution);
+		Pulse(pin1, 1.0);
 		break;
 	case '0':
-
+		Pulse(pin1, 3.0);
+		Wait(3/resolution);
+		Pulse(pin1, 3.0);
+		Wait(3/resolution);
+		Pulse(pin1, 3.0);
+		Wait(3/resolution);
+		Pulse(pin1, 3.0);
+		Wait(3/resolution);
+		Pulse(pin1, 3.0);
 		break;
 	}
 }
