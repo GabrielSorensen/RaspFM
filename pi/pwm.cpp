@@ -73,7 +73,7 @@ int main (int argc, char *argv[]) {
 					--t;
 				}
 			}
-			Pulse(out1, 1/resolution);
+			Pulse(out1, sin((PI/2)/t));
 			Wait(sin((PI/2)/t));
 		}
 	}
