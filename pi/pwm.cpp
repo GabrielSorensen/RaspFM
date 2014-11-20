@@ -203,7 +203,120 @@ void morseReciever(GPIOClass* pin){
 			character.push_back(" ");
 		}
 	}
-
+	for(int i = 0; i < char.size(); i++;){
+		if(c == "10111"){
+			cout << "a";
+		}
+		else if(c == "1110101010"){
+			cout << "b";
+		}
+		else if(c == "11101011101"){
+			cout << "c";
+		}
+		else if(c == "1110101"){
+			cout << "d";
+		}
+		else if(c == "1"){
+			cout << "e";
+		}
+		else if(c == "101011101"){
+			cout << "f";
+		}
+		else if(c == "111011101"){
+			cout << "g";
+		}
+		else if(c == "1010101"){
+			cout << "h";
+		}
+		else if(c == "101"){
+			cout << "i";
+		}
+		else if(c == "1011101110111"){
+			cout << "j";
+		}	
+		else if(c == "111010111"){
+			cout << "k";
+		}
+		else if(c == "101110101"){
+			cout << "l";
+		}
+		else if(c == "1110111"){
+			cout << "m";
+		}
+		else if(c == "11101"){
+			cout << "n";
+		}
+		else if(c == "11101110111"){
+			cout << "o";
+		}
+		else if(c == "10111011101"){
+			cout << "p";
+		}
+		else if(c == "1110111010111"){
+			cout << "q";
+		}
+		else if(c == "1011101"){
+			cout << "r";
+		}
+		else if(c == "10101"){
+			cout << "s";
+		}
+		else if(c == "111"){
+			cout << "t";
+		}
+		else if(c == "1010111"){
+			cout << "u";
+		}
+		else if(c == "101010111"){
+			cout << "v";
+		}
+		else if(c == "101110111"){
+			cout << "w";
+		}
+		else if(c == "11101010111"){
+			cout << "x";
+		}
+		else if(c == "1110101110111"){
+			cout << "y";
+		}
+		else if(c == "11101110101"){
+			cout << "z";
+		}
+		else if(c == "1110111011101110111"){
+			cout << 0;
+		}
+		else if(c == "10111011101110111"){
+			cout << 1;
+		}
+		else if(c == "101011101110111"){
+			cout << 2;
+		}
+		else if(c == "1010101110111"){
+			cout << 3;
+		}
+		else if(c == "10101010111"){
+			cout << 4;
+		}
+		else if(c == "101010101"){
+			cout << 5;
+		}
+		else if(c == "11101010101"){
+			cout << 6;
+		}
+		else if(c == "1110111010101"){
+			cout << 7;
+		}
+		else if(c == "111011101110101"){
+			cout << 8;
+		}
+		else if(c == "11101110111011101"){
+			cout << 9;
+		}
+		else{
+			cout << " ";
+		}
+	}
+	cout << endl;
 }
 
 void morseCoder(GPIOClass* pin1, string s) {
