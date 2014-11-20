@@ -52,7 +52,7 @@ int main (int argc, char *argv[]) {
 		clock_t finish = clock() + time_to_complete * CLOCKS_PER_SEC;
 		while (clock() < finish) {
 			// pulse for however long we need to to achieve brightness.
-				cout << sin((PI/2) * (finish) << endl;
+				cout << sin((PI/2) * finish) << endl;
 				Pulse(out1, sin((PI/2) * (1/time_to_complete)));
 				Wait(sin((PI/2) * (1/time_to_complete)));
 		}
