@@ -54,9 +54,10 @@ int main (int argc, char *argv[]) {
 		while (clock() < finish) {
 			// pulse for however long we need to to achieve brightness.
 			t -= 1;
-			cout << sin((PI/2) * abs(1/t)) << endl;
-			Pulse(out1, sin((PI/2) * abs(1/t)));
-			Wait(sin((PI/2) * abs(1/t)));
+			//Pulse(out1, sin((2PI/2) * abs(1/t)));
+			//Wait(sin((PI/2) * abs(1/t)));
+			Pulse(out1, sin((2*PI) * abs(1/t)));
+			Wait(sin((2*PI) * abs(1/t)));
 		}
 	}
 	if (type == "falling") {
@@ -75,8 +76,8 @@ int main (int argc, char *argv[]) {
 		clock_t finish = clock() + time_to_complete * CLOCKS_PER_SEC;
 		while (clock() < finish) {
 			// pulse for however long we need to to achieve brightness.
-			Pulse(out1, 1 * resolution);
-			Wait(0.5);
+			Pulse(out1, 1 / resolution);
+			Wait(1/resolution);
 		}
 	}
 	cout << "Done." << endl;
