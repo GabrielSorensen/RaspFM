@@ -53,7 +53,7 @@ int main (int argc, char *argv[]) {
 			morseReciever(in2);
 		} else {
 			cout << "tansmitting:" << endl;
-			morseCoder(in2, in);
+			morseCoder(out1, in);
 		}
 		return 0;
 	}
