@@ -108,6 +108,12 @@ int main (int argc, char *argv[]) {
 			Wait(4/resolution);
 		}
 	}
+	if (type == "morse") {
+		string in;
+		cout << "Type sentence to translate to morse code." << endl;
+		cin >> in;
+		morseCoder(out1, in);
+	}
 	cout << "Done." << endl;
 }
 
