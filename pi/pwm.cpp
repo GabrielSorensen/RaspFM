@@ -171,6 +171,7 @@ void morseReciever(GPIOClass* pin){
 	in = in.substr(start);
 	word = strtok(in, "0000000");
 	while(word!=NULL){
+		cout << word << endl;
 		word = strtok(NULL, "0000000");
 	}
 }
