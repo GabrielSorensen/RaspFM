@@ -58,7 +58,7 @@ int main (int argc, char *argv[]) {
 				t = 1;		
 			}
 			else{
-				t -=resolution;
+				t -=(1/resolution);
 			}
 			//Pulse(out1, sin((2PI/2) * abs(1/t)));
 			//Wait(sin((PI/2) * abs(1/t)));
