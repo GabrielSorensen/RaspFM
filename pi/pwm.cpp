@@ -37,6 +37,10 @@ int main (int argc, char *argv[]) {
 		string in;
 		cout << "Type sentence to translate to morse code." << endl;
 		getline(cin, in);
+		cout << "time for 1 cycle?: " << endl;
+		double r;
+		cin >> r;
+		resolution = r;
 		morseCoder(out1, in);
 		return 0;
 	}
