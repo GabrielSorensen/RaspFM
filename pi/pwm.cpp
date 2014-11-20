@@ -61,10 +61,11 @@ int main (int argc, char *argv[]) {
 	}
 	if (type == "blink") { // aka. TESTR
 		clock_t finish = clock() + time_to_complete * CLOCKS_PER_SEC;
-				while (clock() < finish) {
-					// pulse for however long we need to to achieve brightness.
-					Pulse(out1, 1 * 100.0);
-				}
+		while (clock() < finish) {
+			// pulse for however long we need to to achieve brightness.
+			Pulse(out1, 1 * 100.0);
+			Wait(0.5);
+		}
 	}
 	cout << "Done." << endl;
 }
