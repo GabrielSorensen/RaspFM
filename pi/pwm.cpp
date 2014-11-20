@@ -3,6 +3,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <string>
+#include <cstring>
 #include <ctime>
 #include <algorithm>
 #include <cmath>
@@ -154,10 +155,23 @@ void Wait ( double seconds )
 }
 
 void morseReciever(GPIOClass* pin){
-	string in;
+	string in, s;
 	bool running = true;
 	while (running) {
-
+		pin->getval_gpio(s)
+		in += s;
+		if(in.lenght() > 12){
+			substr(in.length()-12,in.length());
+			running = false;
+		}
+	}
+	int start;
+	char *word, *character;
+	start = in.find("1");
+	in = in.substr(start);
+	word = strtok(in, "0000000");
+	while(word!=NULL){
+		word = strtok(NULL, "0000000");
 	}
 }
 
