@@ -5,6 +5,7 @@
 #include <string>
 #include <ctime>
 #include <algorithm>
+#include <cmath>
 #include "GPIOClass.h"
 
 using namespace std;
@@ -13,6 +14,9 @@ void Pulse(GPIOClass* pin, double cycles);
 void Wait(double seconds);
 clock_t timer;
 double time_to_complete;
+double resolution = 100;
+
+#define PI = 4*atan(1);
 
 int main (int argc, char *argv[]) {
 	string type = argv[1];
@@ -48,6 +52,8 @@ int main (int argc, char *argv[]) {
 		clock_t finish = clock() + time_to_complete * CLOCKS_PER_SEC;
 		while (clock() < finish) {
 			// pulse for however long we need to to achieve brightness.
+			Pulse(out1, sin((PI/2) * ((time_to_complete * resolution) / resolution )));
+			Wait(sin((PI/2) * ((time_to_complete * resolution) / resolution )));
 		}
 	}
 	if (type == "falling") {
@@ -63,7 +69,7 @@ int main (int argc, char *argv[]) {
 		clock_t finish = clock() + time_to_complete * CLOCKS_PER_SEC;
 		while (clock() < finish) {
 			// pulse for however long we need to to achieve brightness.
-			Pulse(out1, 1 * 100.0);
+			Pulse(out1, 1 * resolution);
 			Wait(0.5);
 		}
 	}
@@ -76,7 +82,7 @@ void Pulse(GPIOClass* pin, double cycles) {
 	bool running = true;
 	while (running) {
 		pin->setval_gpio("1"); // turn the pin on
-		Wait(cycles * 1/100); // sleep for number of cycles / 1/100 sec
+		Wait(cycles * 1/resolution); // sleep for number of cycles / 1/100 sec
 		//cout << "Waiting during pulse" << endl;
 		pin->setval_gpio("0"); // turn the pin off
 		running = false; // this is unnessesary but could be useful if modified a bit.
