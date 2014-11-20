@@ -14,7 +14,7 @@ void Pulse(GPIOClass* pin, double cycles);
 void Wait(double seconds);
 clock_t timer;
 double time_to_complete;
-double resolution = 1000;
+double resolution = CLOCKS_PER_SEC;
 
 #define PI 4*atan(1)
 
@@ -43,6 +43,7 @@ int main (int argc, char *argv[]) {
 	in2->setdir_gpio("in");
 
 	cout << "Pins are setup." << endl;
+	cout << "resolution of cpu" << CLOCKS_PER_SEC << endl
 	// avoiding flickering will be at 100hz
 	// aka turn on and off 100 times a sec
 	// a cycle of 0 is off
