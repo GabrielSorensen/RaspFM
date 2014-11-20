@@ -14,6 +14,7 @@ void Pulse(GPIOClass* pin, double cycles);
 void Wait(double seconds);
 void morseCoder(GPIOClass* pin1, string s);
 void morseBlink(GPIOClass* pin1, char c);
+void morseReciever(GPIOClass* pin);
 
 clock_t timer;
 double time_to_complete;
@@ -30,17 +31,20 @@ int main (int argc, char *argv[]) {
 	// lets assume that the way to run this is
 	// pwm.exe [rising/falling/sine/constant]
 	if (argc != 2) {
-		cout << "Usage: pwm [rising/falling/sine/constant/blink]" << endl;
+		cout << "Usage: pwm [rising/falling/sine/constant/blink/morse]" << endl;
 		return -1;
 	}
 	if (type == "morse") {
 		string in;
-		cout << "Type sentence to translate to morse code." << endl;
+		cout << "Type sentence to translate to morse code. Or type recieve to listen" << endl;
 		getline(cin, in);
-		cout << "time for 1 cycle?: " << endl;
+		cout << "enter how long 1 pulse is in 1/x secconds (10 seems good): " << endl;
 		double r;
 		cin >> r;
 		resolution = r;
+		if (in == "recieve" || in == "listen") {
+
+		}
 		morseCoder(out1, in);
 		return 0;
 	}
@@ -91,7 +95,14 @@ int main (int argc, char *argv[]) {
 		}
 	}
 	if (type == "falling") {
-
+		clock_t finish = clock() + time_to_complete * CLOCKS_PER_SEC;
+		while (clock() < finish) {
+			// pulse for however long we need to to achieve brightness.
+			for (double i = 0; i < 1; i += resolution) {
+				Pulse(out1, 1/resolution);
+				Wait(i/resolution);
+			}
+		}
 	}
 	if (type == "sine") {
 		clock_t finish = clock() + time_to_complete * CLOCKS_PER_SEC;
@@ -142,6 +153,13 @@ void Wait ( double seconds )
 	while (clock() < endwait) {}
 }
 
+void morseReciever(GPIOClass* pin){
+	string in;
+	bool running = true;
+	while (running) {
+
+	}
+}
 
 void morseCoder(GPIOClass* pin1, string s) {
 	transform(s.begin(), s.end(), s.begin(), :: tolower);
@@ -149,313 +167,314 @@ void morseCoder(GPIOClass* pin1, string s) {
 		if (s.at(i) == ' ') {
 			Wait( 7 / resolution );
 		} else {
-			Wait(3/resolution);
+			Wait(3/resolution); //wait
 			morseBlink(pin1, s.at(i));
 		}
 	}
 }
+
 void morseBlink(GPIOClass* pin1, char c) {
 	switch (c) {
 	case 'a':
-		Pulse(pin1, 1.0);
-		Wait(3/resolution);
-		Pulse(pin1, 3.0);
+		Pulse(pin1, 1.0); //dot
+		Wait(3/resolution); //wait
+		Pulse(pin1, 3.0); //dash
 		break;
 	case 'b':
-		Pulse(pin1, 3.0);
-		Wait(3/resolution);
-		Pulse(pin1, 1.0);
-		Wait(3/resolution);
-		Pulse(pin1, 1.0);
-		Wait(3/resolution);
-		Pulse(pin1, 1.0);
+		Pulse(pin1, 3.0); //dash
+		Wait(3/resolution); //wait
+		Pulse(pin1, 1.0); //dot
+		Wait(3/resolution); //wait
+		Pulse(pin1, 1.0); //dot
+		Wait(3/resolution); //wait
+		Pulse(pin1, 1.0); //dot
 		break;
 	case 'c':
-		Pulse(pin1, 3.0);
-		Wait(3/resolution);
-		Pulse(pin1, 1.0);
-		Wait(3/resolution);
-		Pulse(pin1, 3.0);
-		Wait(3/resolution);
-		Pulse(pin1, 1.0);
+		Pulse(pin1, 3.0); //dash
+		Wait(3/resolution); //wait
+		Pulse(pin1, 1.0); //dot
+		Wait(3/resolution); //wait
+		Pulse(pin1, 3.0); //dash
+		Wait(3/resolution); //wait
+		Pulse(pin1, 1.0); //dot
 		break;
 	case 'd':
-		Pulse(pin1, 3.0);
-		Wait(3/resolution);
-		Pulse(pin1, 1.0);
-		Wait(3/resolution);
-		Pulse(pin1, 1.0);
+		Pulse(pin1, 3.0); //dash
+		Wait(3/resolution); //wait
+		Pulse(pin1, 1.0); //dot
+		Wait(3/resolution); //wait
+		Pulse(pin1, 1.0); //dot
 		break;
 	case 'e':
-		Pulse(pin1, 1.0);
+		Pulse(pin1, 1.0); //dot
 		break;
 	case 'f':
-		Pulse(pin1, 1.0);
-		Wait(3/resolution);
-		Pulse(pin1, 1.0);
-		Wait(3/resolution);
-		Pulse(pin1, 3.0);
-		Wait(3/resolution);
-		Pulse(pin1, 1.0);
+		Pulse(pin1, 1.0); //dot
+		Wait(3/resolution); //wait
+		Pulse(pin1, 1.0); //dot
+		Wait(3/resolution); //wait
+		Pulse(pin1, 3.0); //dash
+		Wait(3/resolution); //wait
+		Pulse(pin1, 1.0); //dot
 		break;
 	case 'g':
-		Pulse(pin1, 3.0);
-		Wait(3/resolution);
-		Pulse(pin1, 3.0);
-		Wait(3/resolution);
-		Pulse(pin1, 1.0);
+		Pulse(pin1, 3.0); //dash
+		Wait(3/resolution); //wait
+		Pulse(pin1, 3.0); //dash
+		Wait(3/resolution); //wait
+		Pulse(pin1, 1.0); //dot
 		break;
 	case 'h':
-		Pulse(pin1, 1.0);
-		Wait(3/resolution);
-		Pulse(pin1, 1.0);
-		Wait(3/resolution);
-		Pulse(pin1, 1.0);
-		Wait(3/resolution);
-		Pulse(pin1, 1.0);
+		Pulse(pin1, 1.0); //dot
+		Wait(3/resolution); //wait
+		Pulse(pin1, 1.0); //dot
+		Wait(3/resolution); //wait
+		Pulse(pin1, 1.0); //dot
+		Wait(3/resolution); //wait
+		Pulse(pin1, 1.0); //dot
 		break;
 	case 'i':
-		Pulse(pin1, 1.0);
-		Wait(3/resolution);
-		Pulse(pin1, 1.0);
+		Pulse(pin1, 1.0); //dot
+		Wait(3/resolution); //wait
+		Pulse(pin1, 1.0); //dot
 		break;
 	case 'j':
-		Pulse(pin1, 1.0);
-		Wait(3/resolution);
-		Pulse(pin1, 3.0);
-		Wait(3/resolution);
-		Pulse(pin1, 3.0);
-		Wait(3/resolution);
-		Pulse(pin1, 3.0);
+		Pulse(pin1, 1.0); //dot
+		Wait(3/resolution); //wait
+		Pulse(pin1, 3.0); //dash
+		Wait(3/resolution); //wait
+		Pulse(pin1, 3.0); //dash
+		Wait(3/resolution); //wait
+		Pulse(pin1, 3.0); //dash
 		break;
 	case 'k':
-		Pulse(pin1, 3.0);
-		Wait(3/resolution);
-		Pulse(pin1, 1.0);
-		Wait(3/resolution);
-		Pulse(pin1, 3.0);
+		Pulse(pin1, 3.0); //dash
+		Wait(3/resolution); //wait
+		Pulse(pin1, 1.0); //dot
+		Wait(3/resolution); //wait
+		Pulse(pin1, 3.0); //dash
 		break;
 	case 'l':
-		Pulse(pin1, 1.0);
-		Wait(3/resolution);
-		Pulse(pin1, 3.0);
-		Wait(3/resolution);
-		Pulse(pin1, 1.0);
-		Wait(3/resolution);
-		Pulse(pin1, 1.0);
+		Pulse(pin1, 1.0); //dot
+		Wait(3/resolution); //wait
+		Pulse(pin1, 3.0); //dash
+		Wait(3/resolution); //wait
+		Pulse(pin1, 1.0); //dot
+		Wait(3/resolution); //wait
+		Pulse(pin1, 1.0); //dot
 		break;
 	case 'm':
-		Pulse(pin1, 3.0);
-		Wait(3/resolution);
-		Pulse(pin1, 3.0);
+		Pulse(pin1, 3.0); //dash
+		Wait(3/resolution); //wait
+		Pulse(pin1, 3.0); //dash
 		break;
 	case 'n':
-		Pulse(pin1, 3.0);
-		Wait(3/resolution);
-		Pulse(pin1, 1.0);
+		Pulse(pin1, 3.0); //dash
+		Wait(3/resolution); //wait
+		Pulse(pin1, 1.0); //dot
 		break;
 	case 'o':
-		Pulse(pin1, 3.0);
-		Wait(3/resolution);
-		Pulse(pin1, 3.0);
-		Wait(3/resolution);
-		Pulse(pin1, 3.0);
+		Pulse(pin1, 3.0); //dash
+		Wait(3/resolution); //wait
+		Pulse(pin1, 3.0); //dash
+		Wait(3/resolution); //wait
+		Pulse(pin1, 3.0); //dash
 		break;
 	case 'p':
-		Pulse(pin1, 1.0);
-		Wait(3/resolution);
-		Pulse(pin1, 3.0);
-		Wait(3/resolution);
-		Pulse(pin1, 3.0);
-		Wait(3/resolution);
-		Pulse(pin1, 1.0);
+		Pulse(pin1, 1.0); //dot
+		Wait(3/resolution); //wait
+		Pulse(pin1, 3.0); //dash
+		Wait(3/resolution); //wait
+		Pulse(pin1, 3.0); //dash
+		Wait(3/resolution); //wait
+		Pulse(pin1, 1.0); //dot
 		break;
 	case 'q':
-		Pulse(pin1, 3.0);
-		Wait(3/resolution);
-		Pulse(pin1, 3.0);
-		Wait(3/resolution);
-		Pulse(pin1, 1.0);
-		Wait(3/resolution);
-		Pulse(pin1, 3.0);
+		Pulse(pin1, 3.0); //dash
+		Wait(3/resolution); //wait
+		Pulse(pin1, 3.0); //dash
+		Wait(3/resolution); //wait
+		Pulse(pin1, 1.0); //dot
+		Wait(3/resolution); //wait
+		Pulse(pin1, 3.0); //dash
 		break;
 	case 'r':
-		Pulse(pin1, 1.0);
-		Wait(3/resolution);
-		Pulse(pin1, 3.0);
-		Wait(3/resolution);
-		Pulse(pin1, 1.0);
+		Pulse(pin1, 1.0); //dot
+		Wait(3/resolution); //wait
+		Pulse(pin1, 3.0); //dash
+		Wait(3/resolution); //wait
+		Pulse(pin1, 1.0); //dot
 		break;
 	case 's':
-		Pulse(pin1, 1.0);
-		Wait(3/resolution);
-		Pulse(pin1, 1.0);
-		Wait(3/resolution);
-		Pulse(pin1, 1.0);
+		Pulse(pin1, 1.0); //dot
+		Wait(3/resolution); //wait
+		Pulse(pin1, 1.0); //dot
+		Wait(3/resolution); //wait
+		Pulse(pin1, 1.0); //dot
 		break;
 	case 't':
-		Pulse(pin1, 3.0);
+		Pulse(pin1, 3.0); //dash
 		break;
 	case 'u':
-		Pulse(pin1, 1.0);
-		Wait(3/resolution);
-		Pulse(pin1, 1.0);
-		Wait(3/resolution);
-		Pulse(pin1, 3.0);
+		Pulse(pin1, 1.0); //dot
+		Wait(3/resolution); //wait
+		Pulse(pin1, 1.0); //dot
+		Wait(3/resolution); //wait
+		Pulse(pin1, 3.0); //dash
 		break;
 	case 'v':
-		Pulse(pin1, 1.0);
-		Wait(3/resolution);
-		Pulse(pin1, 1.0);
-		Wait(3/resolution);
-		Pulse(pin1, 1.0);
-		Wait(3/resolution);
-		Pulse(pin1, 3.0);
+		Pulse(pin1, 1.0); //dot
+		Wait(3/resolution); //wait
+		Pulse(pin1, 1.0); //dot
+		Wait(3/resolution); //wait
+		Pulse(pin1, 1.0); //dot
+		Wait(3/resolution); //wait
+		Pulse(pin1, 3.0); //dash
 		break;
 	case 'w':
-		Pulse(pin1, 1.0);
-		Wait(3/resolution);
-		Pulse(pin1, 3.0);
-		Wait(3/resolution);
-		Pulse(pin1, 3.0);
+		Pulse(pin1, 1.0); //dot
+		Wait(3/resolution); //wait
+		Pulse(pin1, 3.0); //dash
+		Wait(3/resolution); //wait
+		Pulse(pin1, 3.0); //dash
 		break;
 	case 'x':
-		Pulse(pin1, 3.0);
-		Wait(3/resolution);
-		Pulse(pin1, 1.0);
-		Wait(3/resolution);
-		Pulse(pin1, 1.0);
-		Wait(3/resolution);
-		Pulse(pin1, 3.0);
+		Pulse(pin1, 3.0); //dash
+		Wait(3/resolution); //wait
+		Pulse(pin1, 1.0); //dot
+		Wait(3/resolution); //wait
+		Pulse(pin1, 1.0); //dot
+		Wait(3/resolution); //wait
+		Pulse(pin1, 3.0); //dash
 		break;
 	case 'y':
-		Pulse(pin1, 3.0);
-		Wait(3/resolution);
-		Pulse(pin1, 1.0);
-		Wait(3/resolution);
-		Pulse(pin1, 3.0);
-		Wait(3/resolution);
-		Pulse(pin1, 3.0);
+		Pulse(pin1, 3.0); //dash
+		Wait(3/resolution); //wait
+		Pulse(pin1, 1.0); //dot
+		Wait(3/resolution); //wait
+		Pulse(pin1, 3.0); //dash
+		Wait(3/resolution); //wait
+		Pulse(pin1, 3.0); //dash
 		break;
 	case 'z':
-		Pulse(pin1, 3.0);
-		Wait(3/resolution);
-		Pulse(pin1, 3.0);
-		Wait(3/resolution);
-		Pulse(pin1, 1.0);
-		Wait(3/resolution);
-		Pulse(pin1, 1.0);
-		Wait(3/resolution);
+		Pulse(pin1, 3.0); //dash
+		Wait(3/resolution); //wait
+		Pulse(pin1, 3.0); //dash
+		Wait(3/resolution); //wait
+		Pulse(pin1, 1.0); //dot
+		Wait(3/resolution); //wait
+		Pulse(pin1, 1.0); //dot
+		Wait(3/resolution); //wait
 		break;
 	case '1':
-		Pulse(pin1, 1.0);
-		Wait(3/resolution);
-		Pulse(pin1, 3.0);
-		Wait(3/resolution);
-		Pulse(pin1, 3.0);
-		Wait(3/resolution);
-		Pulse(pin1, 3.0);
-		Wait(3/resolution);
-		Pulse(pin1, 3.0);
+		Pulse(pin1, 1.0); //dot
+		Wait(3/resolution); //wait
+		Pulse(pin1, 3.0); //dash
+		Wait(3/resolution); //wait
+		Pulse(pin1, 3.0); //dash
+		Wait(3/resolution); //wait
+		Pulse(pin1, 3.0); //dash
+		Wait(3/resolution); //wait
+		Pulse(pin1, 3.0); //dash
 		break;
 	case '2':
-		Pulse(pin1, 1.0);
-		Wait(3/resolution);
-		Pulse(pin1, 1.0);
-		Wait(3/resolution);
-		Pulse(pin1, 3.0);
-		Wait(3/resolution);
-		Pulse(pin1, 3.0);
-		Wait(3/resolution);
-		Pulse(pin1, 3.0);
+		Pulse(pin1, 1.0); //dot
+		Wait(3/resolution); //wait
+		Pulse(pin1, 1.0); //dot
+		Wait(3/resolution); //wait
+		Pulse(pin1, 3.0); //dash
+		Wait(3/resolution); //wait
+		Pulse(pin1, 3.0); //dash
+		Wait(3/resolution); //wait
+		Pulse(pin1, 3.0); //dash
 		break;
 	case '3':
-		Pulse(pin1, 1.0);
-		Wait(3/resolution);
-		Pulse(pin1, 1.0);
-		Wait(3/resolution);
-		Pulse(pin1, 1.0);
-		Wait(3/resolution);
-		Pulse(pin1, 3.0);
-		Wait(3/resolution);
-		Pulse(pin1, 3.0);
+		Pulse(pin1, 1.0); //dot
+		Wait(3/resolution); //wait
+		Pulse(pin1, 1.0); //dot
+		Wait(3/resolution); //wait
+		Pulse(pin1, 1.0); //dot
+		Wait(3/resolution); //wait
+		Pulse(pin1, 3.0); //dash
+		Wait(3/resolution); //wait
+		Pulse(pin1, 3.0); //dash
 		break;
 	case '4':
-		Pulse(pin1, 1.0);
-		Wait(3/resolution);
-		Pulse(pin1, 1.0);
-		Wait(3/resolution);
-		Pulse(pin1, 1.0);
-		Wait(3/resolution);
-		Pulse(pin1, 1.0);
-		Wait(3/resolution);
-		Pulse(pin1, 3.0);
+		Pulse(pin1, 1.0); //dot
+		Wait(3/resolution); //wait
+		Pulse(pin1, 1.0); //dot
+		Wait(3/resolution); //wait
+		Pulse(pin1, 1.0); //dot
+		Wait(3/resolution); //wait
+		Pulse(pin1, 1.0); //dot
+		Wait(3/resolution); //wait
+		Pulse(pin1, 3.0); //dash
 		break;
 	case '5':
-		Pulse(pin1, 1.0);
-		Wait(3/resolution);
-		Pulse(pin1, 1.0);
-		Wait(3/resolution);
-		Pulse(pin1, 1.0);
-		Wait(3/resolution);
-		Pulse(pin1, 1.0);
-		Wait(3/resolution);
-		Pulse(pin1, 1.0);
+		Pulse(pin1, 1.0); //dot
+		Wait(3/resolution); //wait
+		Pulse(pin1, 1.0); //dot
+		Wait(3/resolution); //wait
+		Pulse(pin1, 1.0); //dot
+		Wait(3/resolution); //wait
+		Pulse(pin1, 1.0); //dot
+		Wait(3/resolution); //wait
+		Pulse(pin1, 1.0); //dot
 		break;
 	case '6':
-		Pulse(pin1, 3.0);
-		Wait(3/resolution);
-		Pulse(pin1, 1.0);
-		Wait(3/resolution);
-		Pulse(pin1, 1.0);
-		Wait(3/resolution);
-		Pulse(pin1, 1.0);
-		Wait(3/resolution);
-		Pulse(pin1, 1.0);
+		Pulse(pin1, 3.0); //dash
+		Wait(3/resolution); //wait
+		Pulse(pin1, 1.0); //dot
+		Wait(3/resolution); //wait
+		Pulse(pin1, 1.0); //dot
+		Wait(3/resolution); //wait
+		Pulse(pin1, 1.0); //dot
+		Wait(3/resolution); //wait
+		Pulse(pin1, 1.0); //dot
 		break;
 	case '7':
-		Pulse(pin1, 3.0);
-		Wait(3/resolution);
-		Pulse(pin1, 3.0);
-		Wait(3/resolution);
-		Pulse(pin1, 1.0);
-		Wait(3/resolution);
-		Pulse(pin1, 1.0);
-		Wait(3/resolution);
-		Pulse(pin1, 1.0);
+		Pulse(pin1, 3.0); //dash
+		Wait(3/resolution); //wait
+		Pulse(pin1, 3.0); //dash
+		Wait(3/resolution); //wait
+		Pulse(pin1, 1.0); //dot
+		Wait(3/resolution); //wait
+		Pulse(pin1, 1.0); //dot
+		Wait(3/resolution); //wait
+		Pulse(pin1, 1.0); //dot
 		break;
 	case '8':
-		Pulse(pin1, 3.0);
-		Wait(3/resolution);
-		Pulse(pin1, 3.0);
-		Wait(3/resolution);
-		Pulse(pin1, 3.0);
-		Wait(3/resolution);
-		Pulse(pin1, 1.0);
-		Wait(3/resolution);
-		Pulse(pin1, 1.0);
+		Pulse(pin1, 3.0); //dash
+		Wait(3/resolution); //wait
+		Pulse(pin1, 3.0); //dash
+		Wait(3/resolution); //wait
+		Pulse(pin1, 3.0); //dash
+		Wait(3/resolution); //wait
+		Pulse(pin1, 1.0); //dot
+		Wait(3/resolution); //wait
+		Pulse(pin1, 1.0); //dot
 		break;
 	case '9':
-		Pulse(pin1, 3.0);
-		Wait(3/resolution);
-		Pulse(pin1, 3.0);
-		Wait(3/resolution);
-		Pulse(pin1, 3.0);
-		Wait(3/resolution);
-		Pulse(pin1, 3.0);
-		Wait(3/resolution);
-		Pulse(pin1, 1.0);
+		Pulse(pin1, 3.0); //dash
+		Wait(3/resolution); //wait
+		Pulse(pin1, 3.0); //dash
+		Wait(3/resolution); //wait
+		Pulse(pin1, 3.0); //dash
+		Wait(3/resolution); //wait
+		Pulse(pin1, 3.0); //dash
+		Wait(3/resolution); //wait
+		Pulse(pin1, 1.0); //dot
 		break;
 	case '0':
-		Pulse(pin1, 3.0);
-		Wait(3/resolution);
-		Pulse(pin1, 3.0);
-		Wait(3/resolution);
-		Pulse(pin1, 3.0);
-		Wait(3/resolution);
-		Pulse(pin1, 3.0);
-		Wait(3/resolution);
-		Pulse(pin1, 3.0);
+		Pulse(pin1, 3.0); //dash
+		Wait(3/resolution); //wait
+		Pulse(pin1, 3.0); //dash
+		Wait(3/resolution); //wait
+		Pulse(pin1, 3.0); //dash
+		Wait(3/resolution); //wait
+		Pulse(pin1, 3.0); //dash
+		Wait(3/resolution); //wait
+		Pulse(pin1, 3.0); //dash
 		break;
 	}
 }
