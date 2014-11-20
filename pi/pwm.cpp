@@ -162,8 +162,9 @@ void morseReciever(GPIOClass* pin){
 		in += s;
 		cout << s;
 		if(in.length() > 12){
-			in.substr(in.length()-12);
-			running = false;
+			if (in.substr(in.length()-12) == "000000000000") {
+				running = false;
+			}
 		}
 	}
 	cout << endl;
@@ -171,16 +172,16 @@ void morseReciever(GPIOClass* pin){
 	string charv;
 	start = in.find("1");
 	in = in.substr(start);
-	
+
 	space = in.find("0000000");
 	vector<string> word, character;
-	
+
 	while(in.length() > 0){
 		word.push_back(in.substr(0,space));
 		in = in.substr(space+7);
 		word.push_back("s");
 	}
-	
+
 	for(int i =0; i<word.size(); i++){
 		charv = in.at(i);
 		if(in.at(i) != 's'){
