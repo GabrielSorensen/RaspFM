@@ -74,8 +74,8 @@ int main (int argc, char *argv[]) {
 		clock_t finish = clock() + time_to_complete * CLOCKS_PER_SEC;
 		while (clock() < finish) {
 			// pulse for however long we need to to achieve brightness.
-			Pulse(out1, 1/resolution);
 			for (double i = 0; i < 1; i += resolution) {
+				Pulse(out1, 1/resolution);
 				cout << sin(i)/resolution << endl;
 				Wait(sin(i)/resolution);
 			}
