@@ -14,7 +14,7 @@ void Pulse(GPIOClass* pin, double cycles);
 void Wait(double seconds);
 clock_t timer;
 double time_to_complete;
-double resolution = 1000;
+double resolution = 100;
 
 #define PI 4*atan(1)
 
@@ -77,7 +77,7 @@ int main (int argc, char *argv[]) {
 		while (clock() < finish) {
 			// pulse for however long we need to to achieve brightness.
 			Pulse(out1, 1/resolution);
-			Wait(2/resolution);
+			Wait(4/resolution);
 		}
 	}
 	cout << "Done." << endl;
