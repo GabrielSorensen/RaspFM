@@ -14,7 +14,7 @@ void Pulse(GPIOClass* pin, double cycles);
 void Wait(double seconds);
 clock_t timer;
 double time_to_complete;
-double resolution = CLOCKS_PER_SEC;
+double resolution = CLOCKS_PER_SEC/10;
 
 #define PI 4*atan(1)
 
