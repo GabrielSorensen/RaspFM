@@ -65,10 +65,10 @@ int main (int argc, char *argv[]) {
 
 	}
 	if (type == "constant") {
-		pin->setval_gpio("1"); // turn the pin on
+		out1->setval_gpio("1"); // turn the pin on
 		Wait(time_to_complete); // sleep for number of cycles / 1/100 sec
 		//cout << "Waiting during pulse" << endl;
-		pin->setval_gpio("0"); // turn the pin off
+		out1->setval_gpio("0"); // turn the pin off
 	}
 	if (type == "blink") { // aka. TESTR
 		clock_t finish = clock() + time_to_complete * CLOCKS_PER_SEC;
