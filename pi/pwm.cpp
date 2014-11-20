@@ -20,7 +20,7 @@ int main (int argc, char *argv[]) {
 	// lets assume that the way to run this is
 	// pwm.exe [rising/falling/sine/constant]
 	if (argc != 2) {
-		cout << "Usage: pwm [rising/falling/sine/constant]" << endl;
+		cout << "Usage: pwm [rising/falling/sine/constant/pulse]" << endl;
 		return -1;
 	}
 
@@ -48,7 +48,6 @@ int main (int argc, char *argv[]) {
 		clock_t finish = clock() + time_to_complete * CLOCKS_PER_SEC;
 		while (clock() < finish) {
 			// pulse for however long we need to to achieve brightness.
-			Pulse(out1, time_to_complete * 100.0);
 		}
 	}
 	if (type == "falling") {
@@ -59,6 +58,13 @@ int main (int argc, char *argv[]) {
 	}
 	if (type == "constant") {
 
+	}
+	if (type == "blink") { // aka. TESTR
+		clock_t finish = clock() + time_to_complete * CLOCKS_PER_SEC;
+				while (clock() < finish) {
+					// pulse for however long we need to to achieve brightness.
+					Pulse(out1, time_to_complete * 100.0);
+				}
 	}
 }
 
