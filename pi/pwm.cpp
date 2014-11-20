@@ -3,7 +3,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <string>
-#include <cstring>
+#include <vector>
 #include <ctime>
 #include <algorithm>
 #include <cmath>
@@ -160,19 +160,41 @@ void morseReciever(GPIOClass* pin){
 	while (running) {
 		pin->getval_gpio(s);
 		in += s;
+		cout << s;
 		if(in.length() > 12){
 			in.substr(in.length()-12);
 			running = false;
 		}
 	}
-	int start;
+	cout << endl;
+	int start, space;
+	string charv;
 	char *word, *character;
 	start = in.find("1");
 	in = in.substr(start);
-	word = strtok(in, "0000000");
-	while(word!=NULL){
-		cout << word << endl;
-		word = strtok(NULL, "0000000");
+	
+	space = in.find("0000000");
+	vector<string> word, character;
+	
+	while(in!=NULL){
+		word.push_back(in.substr(0,space));
+		in = in.substr(space+7);
+		word.push_back('s');
+	}
+	
+	for(int i =0; i<word.size(); i++){
+		charv = in.at(i);
+		if(in.at(i) != 's'){
+			while(charv!=NULL){
+				string temp;
+				temp = charv.substr(0, charv.find("000"));
+				character.push_back(temp);
+				charv = charv.substr(charv.find("000")+3);
+			}
+		}
+		else{
+			character.push_back(' ');
+		}
 	}
 }
 
