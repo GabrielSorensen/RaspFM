@@ -58,7 +58,7 @@ int main (int argc, char *argv[]) {
 				t = time_to_complete;		
 			}
 			else{
-				t -=;
+				t -=1;
 			}
 			//Pulse(out1, sin((2PI/2) * abs(1/t)));
 			//Wait(sin((PI/2) * abs(1/t)));
