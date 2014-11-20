@@ -52,13 +52,26 @@ int main (int argc, char *argv[]) {
 	if (type == "rising") {
 		clock_t finish = clock() + time_to_complete * CLOCKS_PER_SEC;
 		double t = time_to_complete;
+		int Up = 0;
 		while (clock() < finish) {
 			// pulse for however long we need to to achieve brightness.
-			if(t == 0){
-				t = time_to_complete;		
+			if(!Up){
+				if(t!=0){
+					t-=1;
+				}
+				else{
+					Up = 1;
+					t+=1;
+				}
 			}
 			else{
-				t -=1;
+				if(t!=time_to_complete){
+					t+=1;
+				}
+				else{
+					Up = 0;
+					t-=1;
+				}
 			}
 			//Pulse(out1, sin((2PI/2) * abs(1/t)));
 			//Wait(sin((PI/2) * abs(1/t)));
