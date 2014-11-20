@@ -181,7 +181,7 @@ void morseReciever(GPIOClass* pin){
 
 	while(in.length() > 0){
 		word.push_back(in.substr(0,space));
-		if (in > 7) {
+		if (in.length() > 7) {
 			in = in.substr(space+7);
 		}
 		word.push_back("s");
