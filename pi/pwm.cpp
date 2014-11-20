@@ -203,7 +203,8 @@ void morseReciever(GPIOClass* pin){
 			character.push_back(" ");
 		}
 	}
-	for(int i = 0; i < char.size(); i++;){
+	for(int j = 0; j < character.size(); j++){
+		string c = character.at(j);
 		if(c == "10111"){
 			cout << "a";
 		}
@@ -233,7 +234,7 @@ void morseReciever(GPIOClass* pin){
 		}
 		else if(c == "1011101110111"){
 			cout << "j";
-		}	
+		}
 		else if(c == "111010111"){
 			cout << "k";
 		}
