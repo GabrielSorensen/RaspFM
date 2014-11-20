@@ -56,7 +56,7 @@ int main (int argc, char *argv[]) {
 			if(t > 0){
 				t -= 1;
 			}
-			//cout << t << endl;
+			cout << t << endl;
 			Pulse(out1, sin((PI/2) * (1/t)));
 			Wait(sin((PI/2) * (1/t)));
 		}
