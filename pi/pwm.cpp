@@ -54,9 +54,9 @@ int main (int argc, char *argv[]) {
 		while (clock() < finish) {
 			// pulse for however long we need to to achieve brightness.
 			t -= 1;
-			cout << abs(1/t) << endl;
-			Pulse(out1, sin((PI/2) * abs(1/t)));
-			Wait(sin((PI/2) * abs(1/t)));
+			cout << abs(1/t)/resolution << endl;
+			Pulse(out1, sin((PI/2) * abs(1/t)/resolution));
+			Wait(sin((PI/2) * abs(1/t)/resolution));
 		}
 	}
 	if (type == "falling") {
