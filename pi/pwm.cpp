@@ -29,6 +29,12 @@ int main (int argc, char *argv[]) {
 
 	GPIOClass* out1 = new GPIOClass("4");
 	GPIOClass* in2 = new GPIOClass("17");
+
+	out1->export_gpio();
+	in2->export_gpio();
+
+	out1->setdir_gpio("out");
+	in2->setdir_gpio("in");
 	// lets assume that the way to run this is
 	// pwm.exe [rising/falling/sine/constant]
 	if (argc != 2) {
@@ -54,11 +60,7 @@ int main (int argc, char *argv[]) {
 		cin >> time_to_complete;
 	}
 
-	out1->export_gpio();
-	in2->export_gpio();
 
-	out1->setdir_gpio("out");
-	in2->setdir_gpio("in");
 
 	cout << "Pins are setup." << endl;
 	cout << "resolution of cpu" << CLOCKS_PER_SEC << endl;
