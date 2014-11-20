@@ -181,8 +181,11 @@ void morseReciever(GPIOClass* pin){
 
 	while(in.length() > 0){
 		word.push_back(in.substr(0,space));
-		in = in.substr(space+7);
+		if (in > 7) {
+			in = in.substr(space+7);
+		}
 		word.push_back("s");
+		space = in.find("0000000");
 	}
 	cout << "wprd" << endl;
 
