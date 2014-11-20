@@ -43,7 +43,7 @@ int main (int argc, char *argv[]) {
 	in2->setdir_gpio("in");
 
 	cout << "Pins are setup." << endl;
-	cout << "resolution of cpu" << CLOCKS_PER_SEC << endl
+	cout << "resolution of cpu" << CLOCKS_PER_SEC << endl;
 	// avoiding flickering will be at 100hz
 	// aka turn on and off 100 times a sec
 	// a cycle of 0 is off
