@@ -66,10 +66,10 @@ int main (int argc, char *argv[]) {
 
 	cout << "Pins are setup." << endl;
 	cout << "resolution of cpu" << CLOCKS_PER_SEC << endl;
-	// avoiding flickering will be at 100hz
-	// aka turn on and off 100 times a sec
+	// avoiding flickering will be at 1000hz
+	// aka turn on and off 1000 times a sec
 	// a cycle of 0 is off
-	// a cycle of 100 is on
+	// a cycle of 1000 is on
 
 	if (type == "rising") {
 		clock_t finish = clock() + time_to_complete * CLOCKS_PER_SEC;
@@ -130,7 +130,7 @@ int main (int argc, char *argv[]) {
 		clock_t finish = clock() + time_to_complete * CLOCKS_PER_SEC;
 		while (clock() < finish) {
 			// pulse for however long we need to to achieve brightness.
-			Pulse(out1, 1/resolution);
+			Pulse(out1, 4/resolution);
 			Wait(4/resolution);
 		}
 	}
@@ -159,39 +159,42 @@ void Wait ( double seconds )
 }
 
 void morseReciever(GPIOClass* pin){
-	string in, s;
+	//I'm moving all the method declarations up here
+	string in, s, charv;
+	int start, space;
 	bool running = true;
-	cout << "lets start." << endl;
+	vector<string> word, character; // maybe we should change this to a queue
+
+
+	//cout << "lets start." << endl;
 	while (running) {
 		pin->getval_gpio(s);
 		in += s;
 		cout << s;
-		if(in.length() > 25){
-			if (in.substr(in.length()-12, in.length()) == "000000000000") {
-				running = false;
+		start = in.find("1");
+		if (start != -1) { //Moved this in here so that we actually have a start of
+			in = in.substr(start, in.length()); // data before we can exit the listening.
+			if(in.length() > 25){
+				if (in.substr(in.length()-12, in.length()) == "000000000000") {
+					running = false; // run until we have a substring of 12 '0' at the end of transmission
+				}
 			}
 		}
-		Wait(1/resolution);
 	}
-	int start, space;
-	string charv;
-	start = in.find("1");
-	cout << "start " << start << endl;
+
 	if (start != -1) {
-		in = in.substr(start, in.length());
+		space = in.find("0000000"); // this might need to be moved
+		//cout << "space " << space << endl;
 	}
-	if (start != -1) {
-		space = in.find("0000000");
-	}
-	cout << "space " << space << endl;
-	vector<string> word, character;
+
+	cout << "Starting the decoding process." << endl;
 
 	while(in.length() > 0){
-		word.push_back(in.substr(0,space));
+		word.push_back(in.substr(0,space)); // push word onto vector
 		if (in.length() > 7) {
 			in = in.substr(space+7);
-		}
-		word.push_back("s");
+		} // the s char is the stop char?
+		word.push_back("s");//<-- what does this do, seems like we are pushing an s char onto our data
 		if (start != -1) {
 			space = in.find("0000000");
 		}
@@ -326,12 +329,12 @@ void morseReciever(GPIOClass* pin){
 		}
 	}
 	cout << endl;
-	//morseReciever(pin);
+	return;
 }
 
 void morseCoder(GPIOClass* pin1, string s) {
 	transform(s.begin(), s.end(), s.begin(), :: tolower);
-	for (int i = 0; i < s.length(); i++) {
+	for (int i = 0; i < s.length(); i++) {// apparently you shouldnt compare signed and unsigned datas
 		if (s.at(i) == ' ') {
 			Wait( 7 / resolution );
 		} else {
@@ -341,7 +344,7 @@ void morseCoder(GPIOClass* pin1, string s) {
 	}
 }
 
-void morseBlink(GPIOClass* pin1, char c) {
+void morseBlink(GPIOClass* pin1, char c) { // this damn case switch. this should probably be moved
 	switch (c) {
 	case 'a':
 		Pulse(pin1, 1.0); //dot
