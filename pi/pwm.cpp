@@ -35,6 +35,8 @@ int main (int argc, char *argv[]) {
 
 	out1->setdir_gpio("out");
 	in2->setdir_gpio("in");
+
+	cout << "Pins are setup." << endl;
 	// lets assume that the way to run this is
 	// pwm.exe [rising/falling/sine/constant]
 	if (argc != 2) {
@@ -43,10 +45,10 @@ int main (int argc, char *argv[]) {
 	}
 	if (type == "morse") {
 		string in;
+		double r;
 		cout << "Type sentence to translate to morse code. Or type recieve to listen" << endl;
 		getline(cin, in);
 		cout << "enter how long 1 pulse is in 1/x secconds (10 seems good): " << endl;
-		double r;
 		cin >> r;
 		resolution = r;
 		if (in == "recieve" || in == "listen") {
@@ -64,7 +66,7 @@ int main (int argc, char *argv[]) {
 
 
 
-	cout << "Pins are setup." << endl;
+
 	cout << "resolution of cpu" << CLOCKS_PER_SEC << endl;
 	// avoiding flickering will be at 1000hz
 	// aka turn on and off 1000 times a sec
@@ -115,7 +117,7 @@ int main (int argc, char *argv[]) {
 			// pulse for however long we need to to achieve brightness.
 			for (double i = 0; i < 1; i += resolution) {
 				Pulse(out1, 1/resolution);
-				cout << sin(i)/resolution << endl;
+				cout << "sin(i)/resolution" << sin(i)/resolution << endl;
 				Wait(sin(i)/resolution);
 			}
 		}
@@ -163,8 +165,9 @@ void morseReciever(GPIOClass* pin){
 	string in, s, charv;
 	int start, space;
 	bool running = true;
-	vector<string> word, character; // maybe we should change this to a queue
-
+	vector<string> word, character;
+	word.resize(100); // setting the size before we put anything in.
+	character.resize(100); // hopefully this increases speed
 
 	//cout << "lets start." << endl;
 	while (running) {
